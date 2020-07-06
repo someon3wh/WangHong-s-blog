@@ -3,6 +3,4 @@
 </p>
 <h1 align="center">WangHong`s blog</h1>
 
-[常用资源](https://shimo.im/docs/MuiACIg1HlYfVxrj/)
-[GitHub](https://github.com/Snailclimb/docsify-demo)
-[开始阅读](#docsify-demo)
+[GitHub](https://github.com/someon3wh/)
