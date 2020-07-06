@@ -1,5 +1,5 @@
  * Java
 
-  * [Java学习路线](./docs/java学习路线.md)
+  * [Java学习路线](./docs/javastudy.md)
 
 * 计算机基础
