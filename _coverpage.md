@@ -4,4 +4,4 @@
 <h1 align="center">WangHong`s blog</h1>
 
 [GitHub](https://github.com/someon3wh/)
-[开始阅读](#WangHong-s-blog)
+[开始阅读](README.md)
