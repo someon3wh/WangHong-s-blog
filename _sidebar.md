@@ -1,7 +1,12 @@
 * Java
     * [Java学习路线](./docs/java/javastudy.md)
-    * [Java基础内容](./docs/java/javajichuneirong.md)
     * [Java刷剑指offer](./docs/java/javaleetcode.md)
+* 计算机基础知识
+    * [计算机网络]
+    * [操作系统]
+* 算法
+    * [分类刷题]
+    * [重点专题]
 
 *  数据库
     * [MySQL](./docs/database/Mysql技术内幕阅读笔记.md)
