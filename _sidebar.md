@@ -1,5 +1,17 @@
 * 我的技术文章
     * [一些专题](./docs/article/sometopics.md)
+    * [源码分析]()
+
+*  数据库
+    * [MySQL](./docs/database/Mysql技术内幕阅读笔记.md)
+    * [Redis](./docs/database/Redis设计与实现阅读笔记.md)
+
+*  面试经验
+    * [暑期实习面经](./docs/mianjin/javamianjing.md)
+
+*  思维导图
+    * [导图总结](./docs/mianjin/daotu.md)
+
 * Java
     * [Java学习路线](./docs/java/javastudy.md)
     * [Java基础内容](./docs/java/javajichuneirong.md)
@@ -12,14 +24,10 @@
     
 * 算法
     * [排序算法](./docs/algorithm/排序算法.md)
+    * [深度优先搜索DFS/回溯](./docs/algorithm/dfs.md)
+    * [广度优先搜索BFS]
+    * [二叉树迭代遍历](./docs/algorithm/迭代遍历.md)
+    * [动态规划算法]
 
-*  数据库
-    * [MySQL](./docs/database/Mysql技术内幕阅读笔记.md)
-    * [Redis](./docs/database/Redis设计与实现阅读笔记.md)
 
-*  面试经验
-    * [暑期实习面经](./docs/mianjin/javamianjing.md)
-
-*  思维导图
-    * [导图总结](./docs/mianjin/daotu.md)
 
