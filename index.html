@@ -9,7 +9,9 @@
   <meta name="viewport"
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <!-- <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css"> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-defaults.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css"> -->
+
   
   <!--可以在收藏夹中显示出图标-->
 <link rel="Bookmark" type="image/png" href="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3179455354,4190222100&fm=26&gp=0.jpg" />
@@ -24,7 +26,7 @@
   <script src="//unpkg.com/docsify-edit-on-github/index.js"></script>
   <script>
     window.$docsify = {
-      name: 'WangHong`s blog',
+      name: '王鸿的博客',
       repo: '',
       maxLevel: 5,//最大支持渲染的标题层级
       subMaxLevel: 5,
@@ -32,6 +34,7 @@
       coverpage: true,
       loadSidebar: true,
       auto2top: true,//切换页面后是否自动跳转到页面顶部
+      // loadNavbar: true,
       //全文搜索
       search: {
         //maxAge: 86400000, // 过期时间，单位毫秒，默认一天
@@ -41,9 +44,30 @@
         // 搜索标题的最大程级, 1 - 6
         depth: 3,
       },
+      themeable: {
+          readyTransition : true, // default
+          responsiveTables: true  // default
+      },
     }
   </script>
+  <style>
+    :root {
+      /* Reduce the font size */
+      --base-font-size: 14px;
+  
+      /* Change the theme color hue */
+      --theme-hue: 204;
+      --theme-color   : blue;
+  
+      /* Change the sidebar bullets */
+      --sidebar-nav-link-before-content: '';
+      --sidebar-border-color : blue;
+      --cover-color :blue ;
+      --navbar-root-color:blue ;
+    }
+  </style>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
   <!--Java代码高亮-->
   <script src="//unpkg.com/prismjs/components/prism-java.js"></script>
   <!--全文搜索,直接用官方提供的无法生效-->
