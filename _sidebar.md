@@ -25,9 +25,9 @@
 * 算法
     * [排序算法](./docs/algorithm/排序算法.md)
     * [深度优先搜索DFS/回溯](./docs/algorithm/dfs.md)
-    * [广度优先搜索BFS]
+    * [广度优先搜索BFS](./docs/algorithm/bfs.md)
     * [二叉树迭代遍历](./docs/algorithm/迭代遍历.md)
-    * [动态规划算法]
+    * [动态规划算法](./docs/algorithm/dp.md)
 
 
 
