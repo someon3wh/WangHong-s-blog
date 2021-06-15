@@ -2,7 +2,6 @@
     * [一文解决赛马问题](./docs/article/saima.md)
     * [迭代遍历](./docs/algorithm/迭代遍历.md)
     * [源码分析](./docs/article/sourcecode.md)
-    * [一文解决赛马问题](./docs/article/saima.md)
 
 *  数据库
     * [MySQL](./docs/database/Mysql技术内幕阅读笔记.md)
