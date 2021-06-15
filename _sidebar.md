@@ -1,9 +1,8 @@
 * 我的技术文章
-    * [深度优先搜索DFS/回溯](./docs/algorithm/dfs.md)
-    * [一些专题](./docs/article/sometopics.md)
+    * [一文解决赛马问题](./docs/article/saima.md)
     * [迭代遍历](./docs/algorithm/迭代遍历.md)
     * [源码分析](./docs/article/sourcecode.md)
-    * [一问解决赛马问题](./docs/article/saima.md)
+    * [一文解决赛马问题](./docs/article/saima.md)
 
 *  数据库
     * [MySQL](./docs/database/Mysql技术内幕阅读笔记.md)
