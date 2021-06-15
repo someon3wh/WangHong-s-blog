@@ -2,7 +2,7 @@
 # 第1章  MySQL体系结构和存储引擎
 
 ## 1、MySQL体系结构
-<img src="https://cdn.nlark.com/yuque/0/2021/png/2674809/1621840698147-6b8b1ba2-d7cc-4b7c-b791-d816a71e837b.png#align=left&display=inline&height=512&originHeight=512&originWidth=795&size=241231&status=done&style=shadow&width=795" alt="image.png" style="zoom:80%;" />
+<img src="pictures/1621840698147-6b8b1ba2-d7cc-4b7c-b791-d816a71e837b-1623740436974.png" alt="image.png" style="zoom:80%;" />
 组成部分
 
 - 连接池组件
@@ -42,11 +42,11 @@
 ## 1、概述
 从MySQL5.5版本开始时默认的表存储引擎（之前的版本仅在Windows默认）
 ## 2、版本
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621842624872-76176f85-87c1-40a0-8989-09784c5cbbcd.png#align=left&display=inline&height=201&originHeight=201&originWidth=808&size=55335&status=done&style=shadow&width=808)
+![image.png](pictures/1621842624872-76176f85-87c1-40a0-8989-09784c5cbbcd.png)
 ## 3、InnoDB体系结构
 
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621842738551-f6b33b9b-124f-4631-8747-008b37cf8359.png#align=left&display=inline&height=418&originHeight=418&originWidth=735&size=55164&status=done&style=shadow&width=735)
+![image.png](pictures/1621842738551-f6b33b9b-124f-4631-8747-008b37cf8359.png)
 ### 3.1、后台线程
 后台线程：负责刷新内存池中的数据，保证缓存的是最近的数据
 InnoDB是**多线程的模型**，因此后台有多个不同的后台线程，负责处理不同的任务
@@ -72,7 +72,7 @@ InnoDB是**多线程的模型**，因此后台有多个不同的后台线程，�
 > 就是一块内存区域，通过内存的速度弥补
 > 页从缓冲池刷新回磁盘的操作不是在每次页发生更新时触发，而是用CheckPoint机制
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621843942475-5f011ed9-efbe-482c-9fa1-3e539d2c9076.png#align=left&display=inline&height=288&originHeight=288&originWidth=709&size=55800&status=done&style=shadow&width=709)
+![image.png](pictures/1621843942475-5f011ed9-efbe-482c-9fa1-3e539d2c9076.png)
 
 2. LRU List、Free List和Flush List
 
@@ -127,7 +127,7 @@ midpoint之前的为new列表，之后的为old列表
 
 1. Insert buffer
 > 数据结构是一颗B+树，非叶子节点存放的是search key（键值）
-> ![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621847670768-80085252-e706-45cb-9968-6b9029d726f8.png#align=left&display=inline&height=99&originHeight=99&originWidth=497&size=12627&status=done&style=none&width=497)
+> ![image.png](pictures/1621847670768-80085252-e706-45cb-9968-6b9029d726f8.png)
 
 对于非聚集索引的插入或者更新操作，不是每次直接插入到索引页中，而是先判断插入的非聚集索引页是否在缓冲池中，若在则直接插入；若不在，则先放入一个Insert Buffer对象中。然后再以一定的频率和情况进行Insert buffer 和辅助索引页子节点的merge操作。
 
@@ -150,7 +150,7 @@ midpoint之前的为new列表，之后的为old列表
 - 物理磁盘中共享表空间中连续的128个页，即2个区，大小2MB
 
 在对**缓冲池的脏页进行刷新时，不直接写入磁盘，而是先将脏页复制到内存中的doublewrite buffer**，之后分两次，每次1MB顺序写入共享表空间的物理磁盘上，然后马上**调用fsync函数，同步磁盘**，避免缓冲写带来的问题
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621848074948-5e9cb7a9-ed6d-474d-8f74-d2cb0a9a0384.png#align=left&display=inline&height=383&originHeight=383&originWidth=564&size=51606&status=done&style=shadow&width=564)
+![image.png](pictures/1621848074948-5e9cb7a9-ed6d-474d-8f74-d2cb0a9a0384.png)
 ### 6.3、自适应哈希索引AHI
 时间复杂度为O(1)，B+树的查找次数取决于B+树的高度，一般3到4层
 ### 6.4、异步IO
@@ -219,8 +219,8 @@ MySQL实例启动时，将自己的进程ID写入一个文件中，该文件为p
 - **写入重做日志文件的操作不是直接写，而是先写入一个重做日志缓冲中，再按照一定条件顺序地写入日志文件**
 > redo log是InnoDB存储引擎层的日志，又称重做日志文件，用于记录事务操作的变化，记录的是数据修改之后的值，不管事务是否提交都会记录下来。在实例和介质失败（media failure）时，redo log文件就能派上用场，如数据库掉电，InnoDB存储引擎会使用redo log恢复到掉电前的时刻，以此来保证数据的完整性。
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621868726917-47a7d1c9-d562-4029-82af-c6d7383c5e2d.png#align=left&display=inline&height=255&originHeight=255&originWidth=409&size=47604&status=done&style=shadow&width=409)
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621869057734-32e4da73-53c7-4b7c-a64c-fa7e1cc86244.png#align=left&display=inline&height=232&originHeight=232&originWidth=534&size=47149&status=done&style=shadow&width=534)
+![image.png](pictures/1621868726917-47a7d1c9-d562-4029-82af-c6d7383c5e2d.png)
+![image.png](pictures/1621869057734-32e4da73-53c7-4b7c-a64c-fa7e1cc86244.png)
 > 补充
 
 ### 6.3、redolog和binlog的区别
@@ -241,7 +241,7 @@ MySQL实例启动时，将自己的进程ID写入一个文件中，该文件为p
 
 
 ## 2、InnoDB逻辑存储结构
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621869618293-17a693c9-9a98-4114-a217-c1452494825c.png#align=left&display=inline&height=424&originHeight=424&originWidth=633&size=141319&status=done&style=shadow&width=633)
+![image.png](pictures/1621869618293-17a693c9-9a98-4114-a217-c1452494825c.png)
 所有数据都被逻辑地存放在一个空间中，即表空间
 表空间
 
@@ -277,7 +277,7 @@ MySQL实例启动时，将自己的进程ID写入一个文件中，该文件为p
 
 
 ## 4、InnoDB数据页结构
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621870751259-256921e7-e367-4b7d-bc7d-2846ed8fdf14.png#align=left&display=inline&height=433&originHeight=433&originWidth=477&size=142748&status=done&style=shadow&width=477)
+![image.png](pictures/1621870751259-256921e7-e367-4b7d-bc7d-2846ed8fdf14.png)
 ## 5、Named File Formats 机制
 
 
@@ -315,7 +315,7 @@ MySQL实例启动时，将自己的进程ID写入一个文件中，该文件为p
 ## 2、数据结构与算法
 ### 2.1、二分查找法
 ### 2.2、二叉查找树和平衡二叉树
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621929420537-f1d278fe-309b-47ee-aa84-bb60ba2e0c6e.png#align=left&display=inline&height=158&originHeight=158&originWidth=169&size=8153&status=done&style=shadow&width=169)
+![image.png](pictures/1621929420537-f1d278fe-309b-47ee-aa84-bb60ba2e0c6e.png)
 **二叉查找树**的中序遍历为递增
 二叉查找树的弊端就是容易退化成线性查找
 
@@ -328,14 +328,14 @@ MySQL实例启动时，将自己的进程ID写入一个文件中，该文件为p
 ## 3、B+树
 B+树是为磁盘或其他直接存取辅助设备设计的一种平衡查找树
 所有**记录节点**都是按键值的大小顺序存放在同一层的叶子节点上
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621929761040-f5af08d1-ce96-4962-b5c7-ddb12185680a.png#align=left&display=inline&height=281&originHeight=281&originWidth=658&size=52065&status=done&style=shadow&width=658)
+![image.png](pictures/1621929761040-f5af08d1-ce96-4962-b5c7-ddb12185680a.png)
 ### 3.1、插入操作
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621929847012-410c2689-c1d9-41ae-b752-b1bcb6db6653.png#align=left&display=inline&height=267&originHeight=267&originWidth=595&size=52611&status=done&style=shadow&width=595)
+![image.png](pictures/1621929847012-410c2689-c1d9-41ae-b752-b1bcb6db6653.png)
 **如果叶子节点满了 叶节点的中间节点放到上一次Index page**
 **
 ### 3.2、删除操作
 填充因子最小值设置50%
-**![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621930046769-6452f8b4-97c3-460e-8040-993f64231a94.png#align=left&display=inline&height=169&originHeight=169&originWidth=624&size=40341&status=done&style=shadow&width=624)**
+**![image.png](pictures/1621930046769-6452f8b4-97c3-460e-8040-993f64231a94.png)**
 ## 4、B+树索引
 在数据库中， B+树的高度一般都在2~4层
 B+树索引分为：
@@ -362,7 +362,7 @@ B+树索引分为：
 
 
 ### 4.4、B+树索引的管理
-**![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621931346381-fcc28ca6-1b89-4c65-801a-665edbf2066a.png#align=left&display=inline&height=330&originHeight=330&originWidth=636&size=57072&status=done&style=shadow&width=636)**
+**![image.png](pictures/1621931346381-fcc28ca6-1b89-4c65-801a-665edbf2066a.png)**
 ## 5、Cardinality值
 ### 5.1、什么是
 > 选择性
@@ -372,12 +372,12 @@ B+树索引分为：
 show index结果中的列Cardinality，是一个预估值
 ### 5.2、如何统计
 通过采样的方法来完成
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621931675275-65f2d72e-9a76-493a-b017-883929dfca6d.png#align=left&display=inline&height=163&originHeight=163&originWidth=604&size=54757&status=done&style=shadow&width=604)
+![image.png](pictures/1621931675275-65f2d72e-9a76-493a-b017-883929dfca6d.png)
 
 
 ## 6、B+树索引的使用
 ### 6.1、不同应用中
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621931841478-cbb941ae-0efe-472c-8bad-2cde2576ee52.png#align=left&display=inline&height=435&originHeight=435&originWidth=610&size=166773&status=done&style=none&width=610)
+![image.png](pictures/1621931841478-cbb941ae-0efe-472c-8bad-2cde2576ee52.png)
 ### 6.2、联合索引
 建立在多个列上的索引
 ### 6.3、覆盖索引
@@ -387,7 +387,7 @@ show index结果中的列Cardinality，是一个预估值
 1. 包含主键信息
 1. 对某些统计问题
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621932343090-f337b249-170f-4a75-a30b-b04ace32ece2.png#align=left&display=inline&height=224&originHeight=224&originWidth=758&size=57398&status=done&style=shadow&width=758)
+![image.png](pictures/1621932343090-f337b249-170f-4a75-a30b-b04ace32ece2.png)
 ### 6.4、优化器选择不使用索引的情况
 ### 6.5、索引提示
 显示地告诉优化器使用哪个索引
@@ -412,7 +412,7 @@ InnoDB存储引擎哈希函数采用除法散列方式，冲突机制采用链�
 
 2. 倒排索引
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621933293955-ba42b319-28b5-43f1-aa83-574d6eb1f3bc.png#align=left&display=inline&height=344&originHeight=344&originWidth=720&size=114046&status=done&style=shadow&width=720)
+![image.png](pictures/1621933293955-ba42b319-28b5-43f1-aa83-574d6eb1f3bc.png)
 /？？
 # 第6章 锁
 ## 1、什么是锁
@@ -422,7 +422,7 @@ MyISAM是表级锁
 ## 2、lock 与 latch
 latch一般称为闩锁（轻量级的锁），分为互斥量和读写锁，目的是保证并发线程操作临界资源的正确性，并且没有死锁检测的机制。
 lock的对象是事务，锁定是数据库中的对象，如表、页、行
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621934495801-53868cff-24af-4700-93f5-c87e5144da37.png#align=left&display=inline&height=230&originHeight=230&originWidth=847&size=79159&status=done&style=shadow&width=847)
+![image.png](pictures/1621934495801-53868cff-24af-4700-93f5-c87e5144da37.png)
 ## 3、InnoDB存储引擎中的锁
 ### 3.1、锁的类型
 行级锁
@@ -430,9 +430,9 @@ lock的对象是事务，锁定是数据库中的对象，如表、页、行
 - 共享锁（S Lock） 允许事务读一行数据
 - 排他锁（X Lock） 允许事务删除或更新一行数据
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621934634394-2ce9cd2d-1311-43b5-9fd8-2125aa3bb559.png#align=left&display=inline&height=117&originHeight=117&originWidth=828&size=24337&status=done&style=shadow&width=828)
+![image.png](pictures/1621934634394-2ce9cd2d-1311-43b5-9fd8-2125aa3bb559.png)
 意向锁：将锁定的对象分为多个层次，意味着事务希望在更细粒度上进行加锁
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621934849206-ca02fcf9-74d2-4030-a63e-e832581a3ab1.png#align=left&display=inline&height=662&originHeight=662&originWidth=811&size=259217&status=done&style=shadow&width=811)
+![image.png](pictures/1621934849206-ca02fcf9-74d2-4030-a63e-e832581a3ab1.png)
 ![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1621934869537-8d1ff0e1-dba0-490f-993b-bf7635cd94d2.png#align=left&display=inline&height=199&originHeight=199&originWidth=817&size=44672&status=done&style=shadow&width=817)
 ### 3.2、一致性非锁定读
 指InnoDB存储引擎通过行**多版本控制的方式读取当前执行时间数据库中行的数据**
@@ -451,7 +451,7 @@ MVCC
 
 ### 3.3、一致性锁定读
 在可重复读模式下，InnoDB存储引擎的SELECT操作使用一致性锁定读
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1622192188375-540f52de-d595-4ab2-b3c7-59debc21dfc5.png#align=left&display=inline&height=97&originHeight=97&originWidth=603&size=26334&status=done&style=shadow&width=603)
+![image.png](pictures/1622192188375-540f52de-d595-4ab2-b3c7-59debc21dfc5.png)
 ### 3.4、自增长与锁
 ### 3.5、外键和锁
 外键用于引用完整性的约束检查
@@ -467,7 +467,7 @@ MVCC
 1. `Gap Lock`：间隙锁，锁定一个范围，但不包含记录本身
 1. `Next-Key Lock`：`Gap Lock` +` Record Lock`，锁定一个范围，并且锁定记录本身（技术：Next-Key Locking）
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1622193243963-c3c29d60-4d10-41f4-a325-1d1ae1303b87.png#align=left&display=inline&height=101&originHeight=101&originWidth=625&size=36937&status=done&style=shadow&width=625)
+![image.png](pictures/1622193243963-c3c29d60-4d10-41f4-a325-1d1ae1303b87.png)
 
 
 ### 4.2、解决幻读问题
@@ -496,7 +496,8 @@ InnoDB存储引擎采取Next-Key Locking技术避免幻读
 一个事务的更新操作会被另一个事务的更新操作所覆盖，从而导致数据的不一致
 数据库能阻止丢失更新问题的产生（阻塞）
 解决：可串行化
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1622299176336-964ae91a-41ba-42b2-b4ab-1944f9429fba.png#align=left&display=inline&height=749&originHeight=749&originWidth=715&size=274693&status=done&style=shadow&width=715)
+![image.png](pictures/1622299176336-964ae91a-41ba-42b2-b4ab-1944f9429fba.png)
+
 ## 6、阻塞
 因为不同锁之间的兼容性关系，有些时刻一个事务中的锁需要等待另一个事务中的锁释放它所占用耳朵资源，这就是阻塞
 ## 7、死锁
@@ -681,8 +682,9 @@ MySQL数据库复制的原理就是异步实时的将二进制日志重做传送
 
 ## 5、热备
 ### 5.1、ibbackup
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1622468277693-ac2789be-bca2-4305-a04c-4a4b4b105e65.png#align=left&display=inline&height=213&originHeight=213&originWidth=794&size=86832&status=done&style=shadow&width=794)
+![image.png](pictures/1622468277693-ac2789be-bca2-4305-a04c-4a4b4b105e65.png)
 ![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1622468303620-67f6ea2c-91ad-4e0f-b031-5e63a06f3275.png#align=left&display=inline&height=159&originHeight=317&originWidth=805&size=110527&status=done&style=shadow&width=402.5)
+
 ### 5.2、XtraBackUp
 ## 6、快照备份
 是指通过文件系统支持的快照功能对数据库进行备份
@@ -694,13 +696,13 @@ MySQL数据库复制的原理就是异步实时的将二进制日志重做传送
 1. 从服务器slave把主服务器的二进制日志复制到自己的中继日志（relaylog）中
 1. 从服务器重做中继日志中的日志，把更改应用到自己的数据库上，以达到数据库的最终一致性。
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1622468555242-65459f5c-c1be-4bf2-8bb9-9c728ed27832.png#align=left&display=inline&height=430&originHeight=430&originWidth=764&size=110680&status=done&style=shadow&width=764)
+![image.png](pictures/1622468555242-65459f5c-c1be-4bf2-8bb9-9c728ed27832.png)
 **从服务器两个线程**
 
 - IO线程，读取二进制日志并保存为中继日志
 - SQL线程，复制执行中继日志
 ### 7.2、快照+复制的备份架构
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1622468663314-db60dc92-5262-4936-895e-348dbd409231.png#align=left&display=inline&height=244&originHeight=390&originWidth=701&size=103473&status=done&style=shadow&width=439)
+![image.png](pictures/1622468663314-db60dc92-5262-4936-895e-348dbd409231.png)
 [https://www.cnblogs.com/wade-luffy/p/6307470.html#_label1](https://www.cnblogs.com/wade-luffy/p/6307470.html#_label1)
 还有延时复制
 
