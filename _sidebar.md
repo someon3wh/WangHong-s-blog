@@ -29,6 +29,7 @@
     * [广度优先搜索BFS](./docs/algorithm/bfs.md)
     * [二叉树迭代遍历](./docs/algorithm/迭代遍历.md)
     * [动态规划算法](./docs/algorithm/dp.md)
+    * [堆栈](./docs/algorithm/stackandheap.md)
 
 * tricks
     * [解决语雀导出为Markdown时图片加载不出的问题](./docs/tricks/yqmd.md)
