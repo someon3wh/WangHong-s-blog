@@ -200,13 +200,12 @@ class Solution {
 > 例如，给定一个列表 temperatures = [73, 74, 75, 71, 69, 72, 76, 73]，你的输出应该是 [1, 1, 4, 2, 1, 1, 0, 0]。
 >
 > 提示：气温 列表长度的范围是 [1, 30000]。每个气温的值的均为华氏度，都是在 [30, 100] 范围内的整数。
->
 
 ***分析***
 
 温度数组倒序入栈，栈存序号
 
-- 循环判断当前元素大于等于栈顶元素对应的值，栈顶元素弹出
+- 循环判断当前元素**大于等于**栈顶元素对应的值，栈顶元素弹出
 - 若栈为空，结果为0， 否则为栈顶元素剪去当前索引
 - 将当前索引入栈
 
@@ -224,6 +223,43 @@ class Solution {
             s.push(i);
         }
         return res;
+    }
+}
+```
+
+#### 2.3、84. 柱状图中最大的矩形
+
+***题目介绍***
+
+> 给定 *n* 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。
+>
+> 求在该柱状图中，能够勾勒出来的矩形的最大面积。
+>
+> ![image-20210616105319374](pictures/image-20210616105319374.png)
+
+***分析***
+
+***代码***
+
+```java
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        int res = 0;
+        int len = heights.length;
+        int[] hArr = new int[len + 2];
+        for(int i = 1; i <= len;i++) hArr[i] = heights[i - 1];
+        Stack<Integer> stk = new Stack<>();
+        for(int i = 0; i < hArr.length;i++) {
+            while(!stk.isEmpty() && hArr[i] < hArr[stk.peek()]) {
+                int curIndex = stk.pop();
+                int width = i - stk.peek() - 1;
+                res = Math.max(res, hArr[curIndex] * width);
+            }
+            stk.push(i);
+        }
+
+        return res;
+
     }
 }
 ```
