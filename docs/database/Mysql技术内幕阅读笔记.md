@@ -2,7 +2,7 @@
 # 第1章  MySQL体系结构和存储引擎
 
 ## 1、MySQL体系结构
-<img src="pictures/1621840698147-6b8b1ba2-d7cc-4b7c-b791-d816a71e837b-1623740436974.png" alt="image.png" style="zoom:80%;" />
+![image-20210616084617561](pictures/image-20210616084617561.png)
 组成部分
 
 - 连接池组件

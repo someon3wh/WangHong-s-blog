@@ -3,8 +3,9 @@
 ## 2、简单动态字符串
 simple dynamic string SDS 抽象类型
 ### 2.1、定义
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616376574547-f3ba3d96-9bd6-454a-ac9a-cf4ca866b829.png#align=left&display=inline&height=262&originHeight=262&originWidth=694&size=79013&status=done&style=none&width=694)
+![image.png](pictures/1616376574547-f3ba3d96-9bd6-454a-ac9a-cf4ca866b829.png)
 SDS遵循C字符串**以空字符结尾**的惯例，保存空字符的1字节空间不计算在SDS的len属性里面，并且为空字符分配额外的1字节空间，以及添加空字符到字符串末尾等操作，都是由SDS函数自动完成的，所以这个空字符对于SDS的使用者来说是完全透明的。遵循空字符结尾这一惯例的好处是， SDS可以直接重用一部分 C字符串函数库里面的函数。
+
 ### 2.2、与C字符串的区别
 
 - 常数复杂度获取字符串长度（len属性），C字符串不记录自身的长度信息（必须遍历获得）
@@ -27,13 +28,13 @@ SDS遵循C字符串**以空字符结尾**的惯例，保存空字符的1字节�
 - 二进制安全，可以存二进制数据
 - 兼容部分C字符串函数
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616377775673-995aaee5-647f-4b6c-8672-07f05a563985.png#align=left&display=inline&height=200&originHeight=200&originWidth=727&size=98725&status=done&style=shadow&width=727)
+![image.png](pictures/1616377775673-995aaee5-647f-4b6c-8672-07f05a563985.png)
 ## 3、链表
 redis> LRANGE integers 0 10 
 底层实现就是一个链表
 ### 3.1、链表和链表节点的实现
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616377966255-4ed84544-c859-412e-a803-3859c7c040ee.png#align=left&display=inline&height=351&originHeight=351&originWidth=673&size=99833&status=done&style=shadow&width=673)
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616378012105-b0c823f9-34a4-4a5d-8abd-0c81c6fdde11.png#align=left&display=inline&height=419&originHeight=419&originWidth=747&size=135861&status=done&style=shadow&width=747)
+![image.png](pictures/1616377966255-4ed84544-c859-412e-a803-3859c7c040ee.png)
+![image.png](pictures/1616378012105-b0c823f9-34a4-4a5d-8abd-0c81c6fdde11.png)
 Redis的链表实习的特性如下：
 
 - 双端
@@ -60,18 +61,18 @@ Redis的链表实习的特性如下：
 
 1. 哈希表
 
-    ![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616378325536-fff8937d-e193-4247-a940-27cba2c12091.png#align=left&display=inline&height=289&originHeight=289&originWidth=634&size=68152&status=done&style=shadow&width=634)
+    ![image.png](pictures/1616378325536-fff8937d-e193-4247-a940-27cba2c12091.png)
 
 2. 哈希表节点
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616378501521-2dc9a086-5d88-4a84-ad06-6dd45c6048b5.png#align=left&display=inline&height=270&originHeight=270&originWidth=736&size=54864&status=done&style=none&width=736)
+![image.png](pictures/1616378501521-2dc9a086-5d88-4a84-ad06-6dd45c6048b5.png)
 
 3. 字典
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616378569489-462ea958-babb-4e38-8a4c-eca64a7a1be6.png#align=left&display=inline&height=417&originHeight=417&originWidth=741&size=139589&status=done&style=none&width=741)
+![image.png](pictures/1616378569489-462ea958-babb-4e38-8a4c-eca64a7a1be6.png)
 ### 4.2、哈希算法
 当要将一个新的键值对添加到字典里面时，程序需要先根据键值对的键计算出哈希值和当要将一个新的键值对添加到字典里面时，程序需要先根据键值对的键计算出哈希值和索引值，然后再根据索引值,将包含新键值对的哈希表节点放到哈希表数组的指定索引
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616378672580-75397596-6440-424d-85df-562ce7cff2eb.png#align=left&display=inline&height=376&originHeight=376&originWidth=657&size=106131&status=done&style=shadow&width=657)
+![image.png](pictures/1616378672580-75397596-6440-424d-85df-562ce7cff2eb.png)
 ### 4.3、解决键冲突
 当有两个或以上数量的键被分配到了哈希表数组的同一个索引上面时，我们称这些键发生了冲突(collision)。
 Redis的哈希表使用**链地址法(separatechaining)来解决键冲突**，每个哈希表节点都有一个next指针，多个哈希表节点可以用next指针构成一个单向链表，被分配到同一个索引上的多个节点可以用这个单向链表连接起来，这就解决了键冲突的问题。由于没有尾指针，所以为了速度考虑，采取头插法。（此处类似HashMap）
@@ -89,7 +90,7 @@ Redis的哈希表使用**链地址法(separatechaining)来解决键冲突**，�
 ![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616379363863-3c35388c-bd5f-42ea-a4b2-ee49cd1e4393.png#align=left&display=inline&height=103&originHeight=103&originWidth=762&size=42580&status=done&style=shadow&width=762)
 ### 4.5、渐进式rehash
 rehash动作并不是一次性、集中式地完成的，而是分多次、渐进式地完成的
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616379614012-fe6443fd-5beb-4229-9b9a-add18e2f262f.png#align=left&display=inline&height=315&originHeight=315&originWidth=721&size=169772&status=done&style=shadow&width=721)
+![image.png](pictures/1616379614012-fe6443fd-5beb-4229-9b9a-add18e2f262f.png)
 
 
 ## 5、跳跃表
@@ -100,12 +101,12 @@ Redis在两个地方用到：
 - 实现有序集合键
 - 在集群节点中用作内部数据结构
 ### 5.1、跳跃表的实现
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616379951340-96df451f-e464-49ec-989b-de660ef05fd7.png#align=left&display=inline&height=779&originHeight=779&originWidth=742&size=359000&status=done&style=shadow&width=742)
+![image.png](pictures/1616379951340-96df451f-e464-49ec-989b-de660ef05fd7.png)
 ![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616379959316-6c903310-a9f3-43f3-b064-88d7eada584b.png#align=left&display=inline&height=190&originHeight=190&originWidth=752&size=101296&status=done&style=shadow&width=752)
 
 1. 跳跃表节点
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616380019435-157ddc79-bd0c-4d35-8089-62902aaebff9.png#align=left&display=inline&height=391&originHeight=391&originWidth=591&size=84455&status=done&style=shadow&width=591)
+![image.png](pictures/1616380019435-157ddc79-bd0c-4d35-8089-62902aaebff9.png)
 
 - 层
 > 层的数量越多，访问其他节点的速度越快
@@ -124,12 +125,12 @@ Redis在两个地方用到：
 
 
 ### 5.2、重点回顾
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616380494450-f196318e-7349-4cff-8448-995364f35427.png#align=left&display=inline&height=244&originHeight=244&originWidth=700&size=109557&status=done&style=shadow&width=700)
+![image.png](pictures/1616380494450-f196318e-7349-4cff-8448-995364f35427.png)
 ## 6、整数集合
 整数集合是集合键的底层实现之一，若集合只包含整数值元素，并且这个集合的元素数量不多时，Redis就会使用整数集合
 ### 6.1、整数集合的实现
 保存类型：int16_t, int32_t, int64_t
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616380711937-a5094094-4aff-4c7b-8c33-1f61771fa649.png#align=left&display=inline&height=206&originHeight=206&originWidth=610&size=50729&status=done&style=shadow&width=610)
+![image.png](pictures/1616380711937-a5094094-4aff-4c7b-8c33-1f61771fa649.png)
 contents数组是整数集合的底层实现:整数集合的每个元素都是contents数组的一个数组项(item),各个项在数组中按值的大小从小到大有序地排列，并且数组中不包含任何重复项。
 **contents数组的真正类型取决于encoding属性的值:**
 ### 6.2、升级
@@ -150,14 +151,14 @@ contents数组是整数集合的底层实现:整数集合的每个元素都是co
 ### 6.4、降级
 整数集合不支持降级操作，一旦升级编码就会保持升级后的状态
 ### 6.5、重点回顾
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616381059269-99aabc7d-2da0-4a9a-9ab2-1fb97ee722d0.png#align=left&display=inline&height=172&originHeight=172&originWidth=744&size=78721&status=done&style=shadow&width=744)
+![image.png](pictures/1616381059269-99aabc7d-2da0-4a9a-9ab2-1fb97ee722d0.png)
 ## 7、压缩列表
 压缩列表(ziplist)是**列表键和哈希键**的底层实现之一。当一个列表键只包含少量列表项，并且每个列表项要么就是小整数值，要么就是长度比较短的字符串，那么Redis就会使用压缩列表来做列表键的底层实现。
 ### 7.1、压缩列表的构成
-为了节约内存开发，由一系列特殊编码的连续内存块组成的顺序性数据结构![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616381185544-619f1d5e-4d3a-4302-931e-1c4380be38c5.png#align=left&display=inline&height=346&originHeight=346&originWidth=727&size=169668&status=done&style=shadow&width=727)
+为了节约内存开发，由一系列特殊编码的连续内存块组成的顺序性数据结构![image.png](pictures/1616381185544-619f1d5e-4d3a-4302-931e-1c4380be38c5.png)
 ### 7.2、节点的构成
 可以保存一个整数值或者一个字节数组
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616381273461-110e8374-49a6-4734-9abe-6ddac1ec166b.png#align=left&display=inline&height=307&originHeight=307&originWidth=716&size=126363&status=done&style=shadow&width=716)
+![image.png](pictures/1616381273461-110e8374-49a6-4734-9abe-6ddac1ec166b.png)
 
 1. previous_entry_length
 
@@ -168,23 +169,23 @@ contents数组是整数集合的底层实现:整数集合的每个元素都是co
 2. content 负责保存节点的值
 ### 7.3、连锁更新
 Redis将这种在特殊情况下产生的连续多次空间扩"展操作称之为“连锁更新"(cascadeupdate),图7-13展示了这一过程。
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616381584345-488ffba7-5213-4fe8-8cf1-aa04e3aaa308.png#align=left&display=inline&height=428&originHeight=428&originWidth=618&size=122568&status=done&style=shadow&width=618)
+![image.png](pictures/1616381584345-488ffba7-5213-4fe8-8cf1-aa04e3aaa308-1623805599601.png)
 ### 7.4、重点回顾
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616381617443-ccdf153c-dd2c-493e-bf48-ed6b2b81c86d.png#align=left&display=inline&height=154&originHeight=154&originWidth=706&size=70116&status=done&style=shadow&width=706)
+![image.png](pictures/1616381617443-ccdf153c-dd2c-493e-bf48-ed6b2b81c86d.png)
 
 
 ## 8、对象
 Redis并没有直接使用这些数据结构来实现键值对数据库，而是基于这些数据结构创建了一个对象系统，这个系统包含字符串对象、列表对象、哈希对象、集合对象和有序集合对象这五种类型的对象，每种对象都用到了至少一种我们前面所介绍的数据结构。
 ### 8.1、对象的类型与编码
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616381714469-7885564d-fa15-4450-9a7a-4fb73125993d.png#align=left&display=inline&height=278&originHeight=278&originWidth=713&size=72755&status=done&style=shadow&width=713)
+![image.png](pictures/1616381714469-7885564d-fa15-4450-9a7a-4fb73125993d.png)
 
 1. 类型 type
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616381738292-099d5c99-01bf-4aa4-bbe6-d860e37c5032.png#align=left&display=inline&height=214&originHeight=214&originWidth=296&size=40229&status=done&style=shadow&width=296)
+![image.png](pictures/1616381738292-099d5c99-01bf-4aa4-bbe6-d860e37c5032.png)
 
 2. 编码和底层实现 encoding
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616381887912-9cc7b169-e303-4abd-a517-a280527d1472.png#align=left&display=inline&height=341&originHeight=341&originWidth=740&size=177428&status=done&style=shadow&width=740)
+![image.png](pictures/1616381887912-9cc7b169-e303-4abd-a517-a280527d1472.png)
 ### 8.2、字符串对象
 字符串对象的编码可以是int、raw或者embstr。
 
@@ -196,45 +197,45 @@ Redis并没有直接使用这些数据结构来实现键值对数据库，而是
 > embstr只读 若需要转换应将它变成raw类型
 
   4. 字符串命令得到实现
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616382151090-c21908c1-62c4-4476-9ee2-ef3e16ad9762.png#align=left&display=inline&height=704&originHeight=704&originWidth=727&size=357882&status=done&style=shadow&width=727)
+![image.png](pictures/1616382151090-c21908c1-62c4-4476-9ee2-ef3e16ad9762.png)
 ### 8.3、列表对象
 列表对象的编码可以是ziplist或者linkedlist。
 #### 1、编码转换
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616382284400-91d16521-d17e-41e6-aea8-ca6ff194ca25.png#align=left&display=inline&height=82&originHeight=82&originWidth=693&size=44112&status=done&style=shadow&width=693)
+![image.png](pictures/1616382284400-91d16521-d17e-41e6-aea8-ca6ff194ca25.png)
 #### 2、列表命令实现
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616382324038-485ae30e-3f9a-45a3-b04f-1cdab8d50e17.png#align=left&display=inline&height=621&originHeight=621&originWidth=709&size=334302&status=done&style=shadow&width=709)
+![image.png](pictures/1616382324038-485ae30e-3f9a-45a3-b04f-1cdab8d50e17.png)
 ### 8.4、哈希对象
 ziplist 或者 Hashtable
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616382392667-4230a4b7-76e4-4369-9f5c-7852304b5fea.png#align=left&display=inline&height=129&originHeight=129&originWidth=712&size=70764&status=done&style=shadow&width=712)
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616382427107-19a93171-bf87-4ecd-b2a5-09ffa3eec4b6.png#align=left&display=inline&height=112&originHeight=112&originWidth=717&size=57606&status=done&style=shadow&width=717)
+![image.png](pictures/1616382392667-4230a4b7-76e4-4369-9f5c-7852304b5fea.png)
+![image.png](pictures/1616382427107-19a93171-bf87-4ecd-b2a5-09ffa3eec4b6.png)
 #### 1、编码转换
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616382557370-b7169dd0-da8b-452b-8847-fa8da3d649ef.png#align=left&display=inline&height=107&originHeight=107&originWidth=685&size=53509&status=done&style=shadow&width=685)
+![image.png](pictures/1616382557370-b7169dd0-da8b-452b-8847-fa8da3d649ef.png)
 #### 2、哈希命令的实现
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616382599028-cf382861-3715-4e0f-ba7d-9ab104936eb6.png#align=left&display=inline&height=513&originHeight=513&originWidth=709&size=254492&status=done&style=shadow&width=709)
+![image.png](pictures/1616382599028-cf382861-3715-4e0f-ba7d-9ab104936eb6.png)
 ### 8.5、集合对象
 intset或者Hashtable
 #### 1、编码转换
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616382650363-5b5676d9-1119-493f-a093-4037525cf6e7.png#align=left&display=inline&height=113&originHeight=113&originWidth=555&size=47190&status=done&style=shadow&width=555)
+![image.png](pictures/1616382650363-5b5676d9-1119-493f-a093-4037525cf6e7.png)
 #### 2、集合命令的实现
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616382677353-238e5434-d7c1-49df-8d27-d5b7b9caf0c0.png#align=left&display=inline&height=117&originHeight=117&originWidth=716&size=50804&status=done&style=shadow&width=716)
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616382686943-20f80bc6-ba90-40b6-99fb-2e78fb31e61b.png#align=left&display=inline&height=409&originHeight=409&originWidth=726&size=230116&status=done&style=shadow&width=726)
+![image.png](pictures/1616382677353-238e5434-d7c1-49df-8d27-d5b7b9caf0c0.png)
+![image.png](pictures/1616382686943-20f80bc6-ba90-40b6-99fb-2e78fb31e61b.png)
 ### 8.6、有序集合对象
 ziplist或者skiplist
 #### 1、编码的转换
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616382757734-ca271eac-b7e1-40fc-830a-f532ee7580bc.png#align=left&display=inline&height=122&originHeight=122&originWidth=606&size=52337&status=done&style=shadow&width=606)
+![image.png](pictures/1616382757734-ca271eac-b7e1-40fc-830a-f532ee7580bc.png)
 #### 4、有序集合命令的实现
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616382788196-099fa9e6-2f0b-48ca-9299-64353426315d.png#align=left&display=inline&height=648&originHeight=648&originWidth=721&size=337311&status=done&style=shadow&width=721)
+![image.png](pictures/1616382788196-099fa9e6-2f0b-48ca-9299-64353426315d.png)
 ### 8.7、类型检查与命令多态
 ### 8.8、内存回收
 C语言不具备自动内存回收功能，Redis在自己的对象系统中构建了一个引用计数技术实现的内存回收机制，程序可以通过跟踪对象的引用计数信息，在适当的时候自动释放对象并进行内存回收
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616383122630-38b8ddc8-8aa7-4c32-94f2-4d15fbe9d2c8.png#align=left&display=inline&height=127&originHeight=127&originWidth=505&size=60207&status=done&style=shadow&width=505)
+![image.png](pictures/1616383122630-38b8ddc8-8aa7-4c32-94f2-4d15fbe9d2c8.png)
 ### 8.9、内存共享
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616383172311-16ba8789-0390-49d5-98ea-241f13b565b3.png#align=left&display=inline&height=265&originHeight=265&originWidth=728&size=130225&status=done&style=shadow&width=728)
+![image.png](pictures/1616383172311-16ba8789-0390-49d5-98ea-241f13b565b3.png)
 ### 8.10、对象的空转时长
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616383231623-c965c429-d4b5-47cf-a799-e441b19062f7.png#align=left&display=inline&height=480&originHeight=480&originWidth=755&size=147684&status=done&style=shadow&width=755)
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616383261476-6e589795-6988-44ea-84fe-efea2c587a77.png#align=left&display=inline&height=165&originHeight=165&originWidth=728&size=88093&status=done&style=shadow&width=728)
+![image.png](pictures/1616383231623-c965c429-d4b5-47cf-a799-e441b19062f7.png)
+![image.png](pictures/1616383261476-6e589795-6988-44ea-84fe-efea2c587a77.png)
 ### 8.11、重点回顾
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616383280453-7c163c94-5aa3-4f2c-ba77-fc331ccaaab1.png#align=left&display=inline&height=267&originHeight=267&originWidth=693&size=134113&status=done&style=shadow&width=693)
+![image.png](pictures/1616383280453-7c163c94-5aa3-4f2c-ba77-fc331ccaaab1.png)
 p105
 
 
@@ -248,10 +249,10 @@ Redis服务器默认会创建16个数据库
 ### 9.3、数据库键空间
 Redis是一个键值对(key-valuepair)数据库服务器，服务器中的每个数据库都由-一个redis.h/redisDb结构表示，其中，redisDb结构的dict字典保存了数据库中的所有键值对，我们将这个字典称为键空间(keyspace):
 ### 9.4、设置键的生存时间或过期时间
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616401379656-a0e9a77a-58d8-4bea-8c03-4a485a7d76af.png#align=left&display=inline&height=233&originHeight=233&originWidth=585&size=39876&status=done&style=shadow&width=585)
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616401414469-3c91a685-f5ce-4511-a703-d3ab9824e42f.png#align=left&display=inline&height=87&originHeight=87&originWidth=578&size=30758&status=done&style=shadow&width=578)
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616402117664-162482f2-c445-4111-baa1-a1d3627307e9.png#align=left&display=inline&height=254&originHeight=254&originWidth=612&size=47190&status=done&style=shadow&width=612)
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616402140538-96255c3e-86f0-43b2-9a83-e0f3c5bc8ece.png#align=left&display=inline&height=88&originHeight=88&originWidth=620&size=21711&status=done&style=shadow&width=620)
+![image.png](pictures/1616401379656-a0e9a77a-58d8-4bea-8c03-4a485a7d76af.png)
+![image.png](pictures/1616401414469-3c91a685-f5ce-4511-a703-d3ab9824e42f.png)
+![image.png](pictures/1616402117664-162482f2-c445-4111-baa1-a1d3627307e9.png)
+![image.png](pictures/1616402140538-96255c3e-86f0-43b2-9a83-e0f3c5bc8ece.png)
 ### 9.5、过期键删除策略
 #### 1、定时删除
 在设置键的过期时间的同时，创建一个定时器(timer),让定时器在键的过期时间来临时，立即执行对键的删除操作。
@@ -264,37 +265,38 @@ Redis是一个键值对(key-valuepair)数据库服务器，服务器中的每个
 
 
 #### 3、定期删除
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616402940779-b70a36a7-5285-493d-a4ec-6ebf3efbfa5d.png#align=left&display=inline&height=312&originHeight=312&originWidth=583&size=117246&status=done&style=shadow&width=583)
+![image.png](pictures/1616402940779-b70a36a7-5285-493d-a4ec-6ebf3efbfa5d.png)
 ### 9.6、Redis的过期键删除策略
 Redis实际使用的惰性删除和定期删除
 #### 1、惰性删除策略的实现
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616403104414-7cdfd809-dbeb-4bb1-aedb-7837bc610b51.png#align=left&display=inline&height=562&originHeight=562&originWidth=587&size=166538&status=done&style=shadow&width=587)
+![image.png](pictures/1616403104414-7cdfd809-dbeb-4bb1-aedb-7837bc610b51.png)
 #### 2、定期删除策略的实现
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616403380852-1a9b7044-1076-41e8-b0d0-b5fd195bf139.png#align=left&display=inline&height=61&originHeight=61&originWidth=593&size=20334&status=done&style=shadow&width=593)
+![image.png](pictures/1616403380852-1a9b7044-1076-41e8-b0d0-b5fd195bf139.png)
 ![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616403391837-eff239f7-83bc-4188-a5a4-63a651680c70.png#align=left&display=inline&height=60&originHeight=60&originWidth=617&size=19471&status=done&style=shadow&width=617)
 
 
 ### 9.7、AOF、RDB和复制功能对过期键的处理
 #### 1、生成RDB文件
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616403607664-713cbc0e-4ce2-4a89-8fab-8d61645c8da4.png#align=left&display=inline&height=133&originHeight=133&originWidth=581&size=49132&status=done&style=shadow&width=581)
+![image.png](pictures/1616403607664-713cbc0e-4ce2-4a89-8fab-8d61645c8da4.png)
 #### 2、载入RDB文件
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616403730441-858b9812-582c-4518-83b3-02a457fbcb8b.png#align=left&display=inline&height=198&originHeight=198&originWidth=609&size=74820&status=done&style=none&width=609)
+![image.png](pictures/1616403730441-858b9812-582c-4518-83b3-02a457fbcb8b.png)
 #### 3、AOF文件写入
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616403830867-67be4a3c-1a0f-4e0c-8930-7bfe2d2abe8e.png#align=left&display=inline&height=196&originHeight=196&originWidth=578&size=65608&status=done&style=shadow&width=578)
+![image.png](pictures/1616403830867-67be4a3c-1a0f-4e0c-8930-7bfe2d2abe8e.png)
 #### 4、AOF重写
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616403870574-ace89e29-50f6-4be2-aaf1-90d133903af5.png#align=left&display=inline&height=119&originHeight=119&originWidth=596&size=42992&status=done&style=shadow&width=596)
+![image.png](pictures/1616403870574-ace89e29-50f6-4be2-aaf1-90d133903af5.png)
 #### 5、复制
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616403929018-02fc6cde-f027-48c9-a56b-08a7e88ec0a5.png#align=left&display=inline&height=283&originHeight=283&originWidth=603&size=114375&status=done&style=shadow&width=603)
+![image.png](pictures/1616403929018-02fc6cde-f027-48c9-a56b-08a7e88ec0a5-1623805681799.png)
 ### 9.8、数据库通知
 数据库通知是Redis2.8版本新增加的功能，这个功能可以让客户端通过订阅给定的频道或者模式，来获知数据库中键的变化，以及数据库中命令的执行情况。
 这一类关注“某个键执行了什么命令”的通知称为**键空间通知**(key-spacenotifcation),除此之外，还有另一类称为**键事件通知**(key-eventnotification)的通知，它们关注的是“某个命令被什么键执行了”
 
 
 ### 9.9、重点回顾
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616404075827-7e0f8b2a-7f40-45ab-8e8c-052c97a68b5f.png#align=left&display=inline&height=490&originHeight=490&originWidth=586&size=186879&status=done&style=shadow&width=586)
+![image.png](pictures/1616404075827-7e0f8b2a-7f40-45ab-8e8c-052c97a68b5f.png)
 ## 10、RDB持久化
 Redis 提供了RDB持久化功能，**这个功能可以将Redis在内存中的数据库状态保存到磁盘里面，避免数据意外丢失。**
-**![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616404167008-d9776e1d-9cc5-4c18-a022-8a67cd7edf2b.png#align=left&display=inline&height=185&originHeight=185&originWidth=594&size=57744&status=done&style=shadow&width=594)**
+**![image.png](pictures/1616404167008-d9776e1d-9cc5-4c18-a022-8a67cd7edf2b.png)**
+
 ### 10.1、RDB文件的创建和载入
 两个命令：
 
@@ -303,44 +305,47 @@ Redis 提供了RDB持久化功能，**这个功能可以将Redis在内存中的�
 
 和使用SAVE命令或者BGSAVE命令创建RDB文件不同，RDB文件的载人工作是在服务器启动时自动执行的，**所以Redis并没有专门用于载人RDB文件的命令，只要Redis服务器在启动时检测到RDB文件存在，它就会自动载人RDB文件。**
 服务器在载入RDB文件期间，会一直处于阻塞状态
-**![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616404644881-aa789a62-6469-459e-9b83-e0900e2332e2.png#align=left&display=inline&height=107&originHeight=107&originWidth=555&size=43013&status=done&style=shadow&width=555)**
+**![image.png](pictures/1616404644881-aa789a62-6469-459e-9b83-e0900e2332e2.png)**
 ### 10.2、自动间隔性保存
 #### 1、设置保存条件
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616404892750-beb4c552-48bd-4556-9086-0b53fe5adb51.png#align=left&display=inline&height=529&originHeight=529&originWidth=655&size=97647&status=done&style=shadow&width=655)
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616404900817-d31f36cb-a3df-4484-a6ae-297f38e15c76.png#align=left&display=inline&height=159&originHeight=159&originWidth=592&size=30245&status=done&style=shadow&width=592)
+![image.png](pictures/1616404892750-beb4c552-48bd-4556-9086-0b53fe5adb51.png)
+![image.png](pictures/1616404900817-d31f36cb-a3df-4484-a6ae-297f38e15c76.png)
+
 #### 2、dirty计数器和lastsave属性
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616405010158-26a9965e-b306-4b52-9e68-8bcdd1265391.png#align=left&display=inline&height=113&originHeight=113&originWidth=560&size=36715&status=done&style=shadow&width=560)
+![image.png](pictures/1616405010158-26a9965e-b306-4b52-9e68-8bcdd1265391.png)
 #### 3、检查保存条件是否满足
 ### 10.3、RDB文件结构
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616405145423-41fc7d7d-2493-47f0-9e0b-486fb126033f.png#align=left&display=inline&height=113&originHeight=113&originWidth=568&size=19475&status=done&style=shadow&width=568)
+![image.png](pictures/1616405145423-41fc7d7d-2493-47f0-9e0b-486fb126033f.png)
 一个RDB文件的databases部分可以保存任意多个非空数据库。
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616405328400-3bdca976-14e2-46aa-ba0e-45203bd6a024.png#align=left&display=inline&height=257&originHeight=257&originWidth=603&size=75968&status=done&style=shadow&width=603)
+![image.png](pictures/1616405328400-3bdca976-14e2-46aa-ba0e-45203bd6a024.png)
+
 ### 10.4、重点回顾
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616405520115-3bd40e5b-0142-4607-b516-693fc884d8d7.png#align=left&display=inline&height=164&originHeight=164&originWidth=554&size=58259&status=done&style=shadow&width=554)
+![image.png](pictures/1616405520115-3bd40e5b-0142-4607-b516-693fc884d8d7.png)
 ## 11、AOF持久化
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616405543556-2348b2fa-8fa1-44fd-a2a3-eac235addce3.png#align=left&display=inline&height=183&originHeight=183&originWidth=610&size=46635&status=done&style=shadow&width=610)
+![image.png](pictures/1616405543556-2348b2fa-8fa1-44fd-a2a3-eac235addce3.png)
 ### 11.1、AOF持久化的实现
 #### 1、命令追加（append）
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616405672342-ca40023e-3239-4306-8893-729196398782.png#align=left&display=inline&height=302&originHeight=302&originWidth=587&size=54687&status=done&style=shadow&width=587)
+![image.png](pictures/1616405672342-ca40023e-3239-4306-8893-729196398782.png)
 #### 2、AOF文件的写入与同步
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616405725089-e7fb90b7-6802-491a-a963-5579b8054c73.png#align=left&display=inline&height=384&originHeight=384&originWidth=610&size=99356&status=done&style=shadow&width=610)
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616405741723-01bae8e7-0db1-4a1a-a89a-c49b578e6a09.png#align=left&display=inline&height=255&originHeight=255&originWidth=604&size=81787&status=done&style=shadow&width=604)
+![image.png](pictures/1616405725089-e7fb90b7-6802-491a-a963-5579b8054c73.png)
+![image.png](pictures/1616405741723-01bae8e7-0db1-4a1a-a89a-c49b578e6a09.png)
+
 ### 11.2、AOF文件的载入与数据还原
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616405872009-b3bf4482-aeb6-4fca-af29-c678c83fc918.png#align=left&display=inline&height=472&originHeight=472&originWidth=591&size=162490&status=done&style=shadow&width=591)
+![image.png](pictures/1616405872009-b3bf4482-aeb6-4fca-af29-c678c83fc918.png)
 ### 11.3、AOF重写
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616405939241-05fa5e53-829d-4aca-a007-02c96b19bd56.png#align=left&display=inline&height=133&originHeight=133&originWidth=584&size=54019&status=done&style=shadow&width=584)
+![image.png](pictures/1616405939241-05fa5e53-829d-4aca-a007-02c96b19bd56.png)
 #### 1、AOF重写的实现
 ![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616406000165-6dd2b6cd-3e27-4c1e-961d-eb4810db91c2.png#align=left&display=inline&height=72&originHeight=72&originWidth=603&size=27797&status=done&style=shadow&width=603)
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616406022620-da498bb3-a365-48f2-91b4-154eb51708ac.png#align=left&display=inline&height=78&originHeight=78&originWidth=626&size=36530&status=done&style=shadow&width=626)
+![image.png](pictures/1616406022620-da498bb3-a365-48f2-91b4-154eb51708ac.png)
 #### 2、后台重写 164
 在重写AOF文件期间，服务期将无法处理客户端发来的命名请求
 所以Redis决定将AOF重写程序放到子进程里执行
 设置一个AOF重写缓冲区，在服务器创建子进程之后开始使用，当执行一个写命令之后会同时把这个写命令发送给AOF缓冲区和AOF重写缓冲区，保证数据一致性
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616463728054-cab2d9fa-72f3-4da5-95f9-59c59c951153.png#align=left&display=inline&height=159&originHeight=159&originWidth=357&size=33042&status=done&style=shadow&width=357)
+![image.png](pictures/1616463728054-cab2d9fa-72f3-4da5-95f9-59c59c951153.png)
 ![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616463789609-7f835419-8550-4f81-8061-e3a932823a6d.png#align=left&display=inline&height=124&originHeight=124&originWidth=542&size=52597&status=done&style=shadow&width=542)
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616464009800-b06557ed-663b-4bb6-8681-e67cf1b1dffe.png#align=left&display=inline&height=307&originHeight=307&originWidth=550&size=104550&status=done&style=shadow&width=550)
+![image.png](pictures/1616464009800-b06557ed-663b-4bb6-8681-e67cf1b1dffe.png)
 ### 11.4、重点回顾
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616464490139-101b3bad-099d-460a-8dcc-43e18ed25542.png#align=left&display=inline&height=301&originHeight=301&originWidth=523&size=134566&status=done&style=shadow&width=523)
+![image.png](pictures/1616464490139-101b3bad-099d-460a-8dcc-43e18ed25542.png)
 ## 12、事件
 ### 12.1、文件事件
 Redis基于Reactor模式开发了自己的网络事件处理器：文件事件处理器
@@ -350,9 +355,9 @@ Redis基于Reactor模式开发了自己的网络事件处理器：文件事件�
 
 **虽然文件事件处理器以单线程方式运行**，但**通过使用IO多路复用程序来监听多个套接字**，文件事件处理器既实现了高性能的网络通信模型，又可以很好地与Redis服务器中其他同样以单线程方式运行的模块进行对接，这保持了Redis内部单线程设计的简单性。
 #### 1、文件事件处理器的构成
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616464754141-2e7ff48c-45a9-41be-a661-c4d0fb67bb9e.png#align=left&display=inline&height=233&originHeight=233&originWidth=283&size=46550&status=done&style=shadow&width=283)
+![image.png](pictures/1616464754141-2e7ff48c-45a9-41be-a661-c4d0fb67bb9e.png)
 #### 2、I/O多路复用程序的实现
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616464895606-8e8ff618-8136-48bb-8952-fd34102360e4.png#align=left&display=inline&height=219&originHeight=219&originWidth=405&size=42573&status=done&style=shadow&width=405)
+![image.png](pictures/1616464895606-8e8ff618-8136-48bb-8952-fd34102360e4.png)
 ### 12.2、时间事件
 
 - 定时事件
@@ -363,12 +368,12 @@ Redis基于Reactor模式开发了自己的网络事件处理器：文件事件�
 
 ### 12.3、事件的调度与执行
 因为服务器中同时存在文件事件和时间事件两种事件类型，所以服务器必须对这两种事件进行调度，决定何时应该处理文件事件，何时又应该处理时间事件，以及花多少时间来处理它们等等。
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616465248788-ac981e12-14c1-46f3-adb7-e0f69b2ae3a2.png#align=left&display=inline&height=263&originHeight=263&originWidth=346&size=47936&status=done&style=shadow&width=346)
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616465841580-f76cc96f-c8eb-4bfd-b4d5-774177f5b87b.png#align=left&display=inline&height=520&originHeight=520&originWidth=615&size=209707&status=done&style=shadow&width=615)
+![image.png](pictures/1616465248788-ac981e12-14c1-46f3-adb7-e0f69b2ae3a2.png)
+![image.png](pictures/1616465841580-f76cc96f-c8eb-4bfd-b4d5-774177f5b87b.png)
 
 
 ### 12.4、重点回顾
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616465907330-fd799a2c-0dd4-4e0a-a0a1-1d72cbe1833a.png#align=left&display=inline&height=265&originHeight=265&originWidth=588&size=116216&status=done&style=shadow&width=588)
+![image.png](pictures/1616465907330-fd799a2c-0dd4-4e0a-a0a1-1d72cbe1833a.png)
 
 
 ## 13、客户端
@@ -378,65 +383,66 @@ Redis基于Reactor模式开发了自己的网络事件处理器：文件事件�
 #### 2、名字 
 client setname ，默认没有名字
 #### 3、标志
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616466234544-cdf2ce31-4247-41c4-b4a2-4c2a21dd45a9.png#align=left&display=inline&height=254&originHeight=254&originWidth=554&size=72544&status=done&style=shadow&width=554)
+![image.png](pictures/1616466234544-cdf2ce31-4247-41c4-b4a2-4c2a21dd45a9.png)
 ### 13.2、客户端的创建与关闭
 clients链表
 载入AOF文件时，会创建用于执行AOF文件包含的Redis命令的伪客户端
 ### 13.3、重点回顾
 ![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616467026628-669503b8-88eb-4e77-abbe-9101350648c9.png#align=left&display=inline&height=62&originHeight=62&originWidth=576&size=21946&status=done&style=shadow&width=576)
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616467054767-5097fb0c-92ca-40b3-8f0e-9e1e49569bb7.png#align=left&display=inline&height=413&originHeight=413&originWidth=576&size=181539&status=done&style=shadow&width=576)
+![image.png](pictures/1616467054767-5097fb0c-92ca-40b3-8f0e-9e1e49569bb7.png)
 ## 14、服务器
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616467673519-a9940b4a-9af8-4606-bf16-393e696adc40.png#align=left&display=inline&height=208&originHeight=208&originWidth=593&size=94942&status=done&style=shadow&width=593)
+![image.png](pictures/1616467673519-a9940b4a-9af8-4606-bf16-393e696adc40.png)
 # 三、多机数据库的实现
 ## 15、复制
 SLAVEOF
 ![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616467749385-53140a84-5e83-49bf-81c4-4f7027697430.png#align=left&display=inline&height=102&originHeight=102&originWidth=615&size=48128&status=done&style=shadow&width=615)
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616467817221-1f8362c5-3e3a-4cf9-992b-c1f74c48ad19.png#align=left&display=inline&height=191&originHeight=191&originWidth=608&size=77739&status=done&style=shadow&width=608)
+![image.png](pictures/1616467817221-1f8362c5-3e3a-4cf9-992b-c1f74c48ad19.png)
 ### 15.1、旧版复制功能的实现
 两个操作：
 
 - 同步操作 将从服务器的数据库状态更新至主服务器当前所处的数据库状态
 - 命令传播工作 在主服务器的数据库状态被修改，导致主从服务器的数据库状态出现不一致时，让主从服务器的数据库重新回到一致状态
 #### 1、同步
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616468220995-bc1cbd30-1305-435f-854e-bb03eee291f4.png#align=left&display=inline&height=289&originHeight=289&originWidth=579&size=133089&status=done&style=shadow&width=579)
+![image.png](pictures/1616468220995-bc1cbd30-1305-435f-854e-bb03eee291f4.png)
 ![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616468336544-8917bafa-4ab5-4115-b1a0-4f634c74c154.png#align=left&display=inline&height=130&originHeight=130&originWidth=393&size=27651&status=done&style=shadow&width=393)
 #### 2、命令传播
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616468411123-991577a4-cc1c-4928-9519-e463c1bae5b2.png#align=left&display=inline&height=193&originHeight=193&originWidth=262&size=30150&status=done&style=shadow&width=262)
+![image.png](pictures/1616468411123-991577a4-cc1c-4928-9519-e463c1bae5b2.png)
 ### 15.2、旧版复制功能的缺陷
 复制的两种情况
 
 1. 初次复制
 1. 断线后重复制:处于命令传播阶段的主从服务器因为网络原因而中断了复制，但从服务器通过自动重连接重新连上了主服务器，并继续复制主服务器。
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616468644121-92ddea2a-0b60-42f2-8363-2aced96128d0.png#align=left&display=inline&height=551&originHeight=551&originWidth=591&size=215093&status=done&style=none&width=591)
+![image.png](pictures/1616468644121-92ddea2a-0b60-42f2-8363-2aced96128d0.png)
 ### 15.3、新版复制功能的实现
 PSYNC的两种模式
 
 - **完整重同步：**处理初次复制情况，完整重同步的执行步骤和SYNC命令的执行步骤基本一样，它们都是通过让主服务器创建并发送RDB文件，以及向从服务器发送保存在缓冲区里面的写命令来进行同步。
 - **部分重同步**：而部分重同步则用于处理断线后重复制情况:当从服务器在断线后重新连接主服务器时，如果条件允许，主服务器可以将主从服务器连接断开期间执行的写命令发送给从服务器，从服务器只要接收并执行这些写命令，就可以将数据库更新至主服务器当前所处的状态。
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616482366208-8c8d9ec7-aab5-4c7d-8541-912a2d78f00a.png#align=left&display=inline&height=155&originHeight=155&originWidth=267&size=25162&status=done&style=shadow&width=267)
+![image.png](pictures/1616482366208-8c8d9ec7-aab5-4c7d-8541-912a2d78f00a.png)
 ### 15.4、部分重同步的实现
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616482515774-79af9b08-71bf-48ae-b8e3-8e8a372f0d53.png#align=left&display=inline&height=90&originHeight=90&originWidth=505&size=33715&status=done&style=shadow&width=505)
+![image.png](pictures/1616482515774-79af9b08-71bf-48ae-b8e3-8e8a372f0d53.png)
 #### 1、复制偏移量
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616482576515-f7d53ad4-5655-4b4a-9742-604b7eae8ccd.png#align=left&display=inline&height=258&originHeight=258&originWidth=589&size=116552&status=done&style=shadow&width=589)
+![image.png](pictures/1616482576515-f7d53ad4-5655-4b4a-9742-604b7eae8ccd.png)
 根据复制偏移量确定主从服务器是否处于一致状态
+
 #### 2、复制积压缓冲区
 主服务器维护，固定长度先进先出队列，默认大小是1MB
 主服务器命令传播时，不仅会将写命令发送给所有从服务器，还会将写命令入队到复制积压缓存区
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616482832957-eab2fc68-6364-4ead-aacf-42be6e947988.png#align=left&display=inline&height=218&originHeight=218&originWidth=452&size=59813&status=done&style=shadow&width=452)
+![image.png](pictures/1616482832957-eab2fc68-6364-4ead-aacf-42be6e947988.png)
 因此，主服务器的复制积压缓冲区里面会保存着一部分最近传播的写命令，并且复**制积压缓冲区会为队列中的每个字节记录相应的复制偏移量**，就像表15-4展示的那样。
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616482913145-06f100cc-797f-46d2-aea8-aad10ba55f42.png#align=left&display=inline&height=147&originHeight=147&originWidth=614&size=46288&status=done&style=shadow&width=614)
+![image.png](pictures/1616482913145-06f100cc-797f-46d2-aea8-aad10ba55f42.png)
 #### 3、服务器运行ID
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616483320602-26627ea5-3f6c-4bf4-b457-e538f4d2c6a3.png#align=left&display=inline&height=375&originHeight=375&originWidth=606&size=178818&status=done&style=shadow&width=606)
+![image.png](pictures/1616483320602-26627ea5-3f6c-4bf4-b457-e538f4d2c6a3.png)
 ### 15.5、PSYNC命令的实现
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616483461717-440f322d-2d19-41d8-8146-ef084cba6e8c.png#align=left&display=inline&height=330&originHeight=330&originWidth=508&size=89486&status=done&style=shadow&width=508)
+![image.png](pictures/1616483461717-440f322d-2d19-41d8-8146-ef084cba6e8c.png)
 ### 15.6、复制的实现（☆）
 
 1. **设置主服务器的地址和端口**
 1. **建立套接字连接**
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616483853434-2f869a30-82e0-441d-b1b2-10b8445908d3.png#align=left&display=inline&height=187&originHeight=187&originWidth=331&size=41126&status=done&style=shadow&width=331)
+![image.png](pictures/1616483853434-2f869a30-82e0-441d-b1b2-10b8445908d3.png)
 
 3. **发送PING命令**
    1. 检查套接字的读写状态是否正常
@@ -446,7 +452,7 @@ PSYNC的两种模式
    1. 主服务器设置了masterauth，进行身份验证；没设置就不需要
    1. 主服务器设置requirepass，从服务器没设置masterauth选项，返回NOAUTH错误；反之返回no password is set
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616484173888-e8e817e0-6dba-4b01-b711-a058ea67f74c.png#align=left&display=inline&height=380&originHeight=380&originWidth=475&size=93586&status=done&style=shadow&width=475)
+![image.png](pictures/1616484173888-e8e817e0-6dba-4b01-b711-a058ea67f74c.png)
 
 5. **发送端口信息**
 
@@ -454,7 +460,7 @@ PSYNC的两种模式
 
 6. **同步PSYNC**
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616484494365-3a29d291-07d7-4854-b914-bfa985091557.png#align=left&display=inline&height=219&originHeight=219&originWidth=573&size=107649&status=done&style=shadow&width=573)
+![image.png](pictures/1616484494365-3a29d291-07d7-4854-b914-bfa985091557.png)
 
 7. **命令传播**
 
@@ -463,8 +469,8 @@ PSYNC的两种模式
 
 ### 15.7、心跳检测
 REPLCONF ACK命令
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616485928659-c61828ae-c498-46fd-ae67-c5fdda2815a5.png#align=left&display=inline&height=164&originHeight=164&originWidth=509&size=56311&status=done&style=shadow&width=509)
+![image.png](pictures/1616485928659-c61828ae-c498-46fd-ae67-c5fdda2815a5.png)
 ### 15.8、重点回顾
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/2674809/1616486036541-4b71d11f-1370-44ae-a34f-f233401ff286.png#align=left&display=inline&height=183&originHeight=183&originWidth=591&size=86515&status=done&style=shadow&width=591)
+![image.png](pictures/1616486036541-4b71d11f-1370-44ae-a34f-f233401ff286.png)
 ## 16、哨兵Sentinel
 ## 17、集群
